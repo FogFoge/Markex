@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Markex</title>
+  <link rel="stylesheet" type="text/css" href="./style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="menubar">
+      <nav>
+        <div id="file" class="option first-option">
+          <div class="option-title">File</div>
+          <div class="option-content">
+            <ul class="option-content-list">
+              <li class="option second-option" onclick="newUntitledFile()">New File</li>
+              <li class="option second-option" onclick="window.electron.createWindow()">New Window</li>
+              <hr/>
+              <li id="open-file" class="option second-option">
+                Open File
+                <input type="file" id="choose-file" style="display:none"/>
+              </li>
+              <li class="option second-option">Open Folder</li>
+              <hr/>
+              <li class="option second-option" onclick="saveActiveFile()">Save</li>
+              <li class="option second-option">Save As</li>
+            </ul>
+          </div>
+        </div>
+        <div id="edit" class="option first-option">
+          <div class="option-title">Edit</div>
+          <div class="option-content">
+            <ul class="option-content-list">
+              <li class="option second-option">Undo</li>
+              <li class="option second-option">Redo</li>
+              <hr/>
+              <li class="option second-option">Cut</li>
+              <li class="option second-option">Copy</li>
+              <li class="option second-option">Paste</li>
+              <hr/>
+              <li class="option second-option">Find</li>
+              <li class="option second-option">Replace</li>
+            </ul>
+          </div>
+        </div>
+        <div id="paragraph" class="option first-option">
+          <div class="option-title">Paragraph</div>
+          <div class="option-content">
+            <ul class="option-content-list">
+              <li class="option second-option">Heading 1</li>
+              <li class="option second-option">Heading 2</li>
+              <li class="option second-option">Heading 3</li>
+              <li class="option second-option">Heading 4</li>
+              <li class="option second-option">Heading 5</li>
+              <li class="option second-option">Heading 6</li>
+              <hr/>
+              <li class="option second-option">Table</li>
+              <li class="option second-option">Code Fence</li>
+              <li class="option second-option">Quote Block</li>
+              <li class="option second-option">Math Block</li>
+            </ul>
+          </div>
+        </div>
+        <div id="settings" class="option first-option">
+          <div class="option-title">Settings</div>
+          <div class="option-content"></div>
+        </div>
+        <div id="help" class="option first-option">
+          <div class="option-title">Help</div>
+          <div class="option-content">
+            <ul>
+              <li class="option second-option">Quick Start</li>
+              <li class="option second-option">About Markex</li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div id="explorer">
+      <div id="active-files-container">
+        <div id="active-files" class="option explorer-option">
+          <span><img id="active-file-icon" src="./images/right-arrow.svg" style="width: 1em" /></span>
+          ACTIVE FILES
+        </div>
+        <div id="active-files-list" style="display: none;"></div>
+      </div>
+      <hr/>
+      <div id="active-folder-container">
+        <div id="active-folder" class="option explorer-option">
+          <span><img id="active-folder-icon" src="./images/right-arrow.svg" style="width: 1em" /></span>
+          ACTIVE FOLDERS
+          <div id="files-in-active-foler" style="display: none;"></div>
+        </div>
+      </div>
+    </div>
+    <main>
+      <div id="markdown-source" contenteditable="true"></div>
+      <div id="markdown-render"></div>
+    </main>
+  </div>
+  <script src="./renderer.js"></script>
+</body>
+
+</html>

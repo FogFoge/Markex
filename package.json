@@ -1,0 +1,28 @@
+{
+  "name": "markex",
+  "version": "1.0.0",
+  "description": "A markdown editor",
+  "main": "main.js",
+  "author": "Lumen Marselan",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.4",
+    "@electron-forge/maker-deb": "^6.0.4",
+    "@electron-forge/maker-rpm": "^6.0.4",
+    "@electron-forge/maker-squirrel": "^6.0.4",
+    "@electron-forge/maker-zip": "^6.0.4",
+    "electron": "^22.0.0"
+  },
+  "scripts": {
+    "dev": "electron .",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0",
+    "highlight.js": "^11.7.0",
+    "linkify-it": "^4.0.1",
+    "markdown-it": "^13.0.1"
+  }
+}
