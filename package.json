@@ -1,6 +1,6 @@
 {
   "name": "markex",
-  "version": "0.0.1",
+  "version": "0.0.0.2",
   "description": "An open-source markdown editor",
   "main": "main.js",
   "author": "Lumen Marselan",
