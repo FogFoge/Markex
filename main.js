@@ -1,8 +1,8 @@
-const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron");
-const path = require("path");
-const fs = require("fs");
+const { app, BrowserWindow, ipcMain, dialog, shell } = require("electron") 
+const path = require("path") 
+const fs = require("fs") 
 
-const hljs = require('highlight.js');
+const hljs = require('highlight.js') 
 const md = require("markdown-it")({
   html: true,
   xhtmlOut: true,
@@ -11,62 +11,66 @@ const md = require("markdown-it")({
   highlight: (str, lang) => {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return hljs.highlight(str, { language: lang }).value;
+        return hljs.highlight(str, { language: lang }).value 
       } catch (__) {}
     }
-    return "";
+    return "" 
   },
-});
+}) 
 md.linkify.tlds('.py', false)
-          .tlds('.cpp', false);
+          .tlds('.cpp', false) 
 
 
 const createWindow = () => {
   const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    minWidth: 1000,
+    minHeight: 600,
+    show: false,
     autoHideMenuBar: true,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
       spellcheck: false,
-      devTools: false
+     // devTools: false
     },
-  });
-  mainWindow.loadFile("index.html");
-};
+  }) 
+  mainWindow.maximize() 
+  mainWindow.show() 
+  mainWindow.loadFile("index.html") 
+  mainWindow.webContents.openDevTools() 
+} 
 
 app.whenReady().then(() => {
-  createWindow();
-});
+  createWindow() 
+}) 
 
 app.on("window-all-closed", () => {
-  if (process.platform !== "darwin") app.quit();
-});
+  if (process.platform !== "darwin") app.quit() 
+}) 
 
 app.on("activate", () => {
-  if (BrowserWindow.getAllWindows().length === 0) createWindow();
-});
+  if (BrowserWindow.getAllWindows().length === 0) createWindow() 
+}) 
 
 ipcMain.on('change', (event, content) => {
   event.returnValue = md.render(content)
-});
+}) 
 
 ipcMain.on('createWindow', () => {
-  createWindow();
-});
+  createWindow() 
+}) 
 
 ipcMain.handle('fileSave', async (_event, data, curPath) => {
   if (curPath) {
-    await fs.writeFile(curPath, data, () => {});
-    return curPath;
+    await fs.writeFile(curPath, data, () => {}) 
+    return curPath 
   }
   else {
-    const { canceled, filePath } = await dialog.showSaveDialog({});
+    const { canceled, filePath } = await dialog.showSaveDialog({}) 
     if (!canceled) {
-      console.log(filePath);
-      console.log(data);
-      await fs.writeFile(filePath, data, () => {});
+      console.log(filePath) 
+      console.log(data) 
+      await fs.writeFile(filePath, data, () => {}) 
     }
-    return filePath;
+    return filePath 
   }
-});
+}) 
